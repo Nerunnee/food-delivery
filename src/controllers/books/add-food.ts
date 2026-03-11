@@ -6,17 +6,14 @@ export const addFood = async (c: AppContext) => {
   const d1 = c.env.FOOD_DELIVERY;
   const db = getDrizzleDb(d1);
 
-  const foods = await db.select().from(foodsTable);
-  const { title } = await c.req.json();
-
-  const foodId = new Date().getTime();
+  const { name, ingredients } = await c.req.json();
 
   const newFood = {
-    id: String(foodId),
-    title,
+    name: name,
+    ingredients,
   };
 
-  const updatedFood = [...foods, newFood];
+  const [food] = await db.insert(foodsTable).values(newFood).returning();
 
-  return c.json({ updatedFood });
+  return c.json({ food });
 };

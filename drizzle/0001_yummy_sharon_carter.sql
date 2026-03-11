@@ -1,0 +1,1 @@
+ALTER TABLE `foods_table` ADD `ingredients` text;

@@ -8,9 +8,11 @@
       "binding": "FOOD_DELIVERY",
       "database_name": "food_delivery",
       "database_id": "fb01148c-0c0c-4f83-bd3e-5b534bce1e26",
-      "migrations_dir": "drizzle",
+      // "migrations_dir": "drizzle",
+      "experimental_remote": true,
     },
   ],
+
   // "compatibility_flags": [
   //   "nodejs_compat"
   // ],

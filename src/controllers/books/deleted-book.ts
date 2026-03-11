@@ -1,3 +1,4 @@
+import { eq } from "drizzle-orm";
 import { getDrizzleDb } from "../../db";
 import { foodsTable } from "../../db/foods";
 import { AppContext } from "../../types";
@@ -9,13 +10,9 @@ export const deletedFood = async (c: AppContext) => {
   const foods = await db.select().from(foodsTable);
   const id = c.req.param("id");
 
-  const foundFood = foods.find((food) => String(food.id) === id);
+  if (!id) return c.json({ message: "not found" });
 
-  if (!foundFood) {
-    return c.json({ message: "Not Found" });
-  }
+  await db.delete(foodsTable).where(eq(foodsTable.id, Number(id)));
 
-  const deletedBook = foods.filter((food) => String(food.id) !== id);
-
-  return c.json({ deletedBook });
+  return c.json({ success: true });
 };

@@ -10,5 +10,5 @@ export const registerFoodsRoute = (app: App) => {
   app.get("/foods/:id", getFoodById);
   app.post("/foods", addFood);
   app.put("/foods/:id", updatedFoodById);
-  app.delete("/foods", deletedFood);
+  app.delete("/foods/:id", deletedFood);
 };
